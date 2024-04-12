@@ -339,7 +339,7 @@ public:
 	// Functions for manipulating the MFRC522
 	/////////////////////////////////////////////////////////////////////////////////////
 	void PCD_Init();
-	void PCD_Init(byte chipSelectPin, byte clockPin, byte misoPin, byte mosiPin);
+	void PCD_Init(byte chipSelectPin, SPIClass *serial);
 	void PCD_Reset();
 	void PCD_AntennaOn();
 	void PCD_AntennaOff();
@@ -408,9 +408,8 @@ public:
 	
 private:
 	byte _chipSelectPin;		// Arduino pin connected to MFRC522's SPI slave select input (Pin 24, NSS, active low)
-	SPIClass serialCom;
-
 	StatusCode MIFARE_TwoStepHelper(byte command, byte blockAddr, long data);
+	SPIClass *serialCom;
 };
 
 #endif
